@@ -10,7 +10,7 @@ MY_ADDRESS=$(ip addr show eth0 |
 cat <<EOF
 Set(\$rtname, '$RT_NAME');
 Set(\$Organization, '$RT_DOMAIN');
-Set(\$WebDomain, '$RT_DOMAIN');
+Set(\$WebDomain, '${RT_WEBDOMAIN:-$RT_DOMAIN}');
 Set(\$WebPath, '$RT_WEBPATH');
 Set(\$CorrespondAddress, '$RT_CORRESPONDADDRESS');
 Set(\$CommentAddress, '$RT_COMMENTADDRESS');
