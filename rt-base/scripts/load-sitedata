@@ -2,7 +2,12 @@
 
 echo "[i] loading sitedata"
 
-for datafile in /etc/rt4/sitedata/*; do
+if ! cd /etc/rt4/sitedata; then
+	echo "[i] nothing to load" >&2
+	exit
+fi
+
+for datafile in *; do
 	[ -f "$datafile" ] || continue
 
 	echo "[i] loading data from $datafile"
