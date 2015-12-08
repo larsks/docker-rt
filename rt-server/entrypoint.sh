@@ -10,10 +10,7 @@ EOF
 
 if ! /scripts/db/check; then
 	rt-setup-database --action init --skip-create
-	if [ -f /etc/rt4/sitedata ]; then
-		rt-setup-database --action insert \
-			--datafile /etc/rt4/sitedata
-	fi
+	/scripts/load-sitedata
 fi
 
 /scripts/rt-passwd root "$RT_ROOT_PASSWORD"

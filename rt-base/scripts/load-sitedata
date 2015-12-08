@@ -1,0 +1,13 @@
+#!/bin/sh
+
+echo "[i] loading sitedata"
+
+for datafile in /etc/rt4/sitedata/*; do
+	[ -f "$datafile" ] || continue
+
+	echo "[i] loading data from $datafile"
+	rt-setup-database --action insert \
+		--datafile "$datafile" \
+		--skip-create
+done
+
