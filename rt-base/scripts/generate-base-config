@@ -14,5 +14,6 @@ Set(\$WebDomain, '$RT_DOMAIN');
 Set(\$WebPath, '$RT_WEBPATH');
 Set(\$CorrespondAddress, '$RT_CORRESPONDADDRESS');
 Set(\$CommentAddress, '$RT_COMMENTADDRESS');
+Set(\$SendmailPath, '/usr/bin/msmtp');
 EOF
 

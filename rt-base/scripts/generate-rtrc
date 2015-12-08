@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cat <<EOF
+server http://rt
+user root
+passwd $RT_ENV_RT_ROOT_PASSWORD
+EOF

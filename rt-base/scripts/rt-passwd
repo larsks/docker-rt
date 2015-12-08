@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+
+use lib '/usr/lib/rt4';
+use RT;
+use RT::User;
+
+RT->LoadConfig;
+
+RT->LoadConfig;
+RT->Init;
+
+my $u = RT::User->new($RT::SystemUser);
+$u->Load($ARGV[0]);
+$u->SetPassword($ARGV[1]);
+

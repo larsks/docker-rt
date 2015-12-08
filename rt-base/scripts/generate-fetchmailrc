@@ -1,0 +1,31 @@
+#!/bin/sh
+
+. /scripts/functions.sh
+
+FETCHMAILRC=/home/rt4/fetchmailrc
+
+if echo "${POP_TLS:-on}" | is_true; then
+	echo '[i] enabling ssl for pop' >&2
+	TLS_ENABLED=1
+fi
+
+if [ -z "$POP_PORT" ]; then
+	if [ "$TLS_ENABLED" = 1 ]; then
+		POP_PORT=995
+	fi
+fi
+
+(
+cat <<EOF
+poll $POP_HOST proto pop3 ${POP_PORT:+port $POP_PORT}
+username $POP_USER password $POP_PASS
+  mda "/usr/bin/rt-mailgate --url http://rt/ --queue General --action correspond"
+EOF
+
+if [ "$TLS_ENABLED" = 1 ]; then
+	echo "  options ssl"
+fi
+) > $FETCHMAILRC
+
+chown rt4:rt4 $FETCHMAILRC
+chmod 600 $FETCHMAILRC
