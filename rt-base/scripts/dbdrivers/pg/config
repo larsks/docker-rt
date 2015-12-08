@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cat <<EOF
+Set(\$DatabaseType, 'Pg');
+Set(\$DatabaseHost, 'db');
+Set(\$DatabaseUser, '$DB_ENV_POSTGRES_USER');
+Set(\$DatabasePassword, '$DB_ENV_POSTGRES_PASSWORD');
+Set(\$DatabaseName, '$DB_ENV_POSTGRES_DB');
+EOF
+

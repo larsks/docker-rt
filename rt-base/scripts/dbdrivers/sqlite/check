@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# always attempt to initialize the database
+exit 1

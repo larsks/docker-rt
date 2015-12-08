@@ -1,0 +1,12 @@
+#!/bin/sh
+
+echo "[i] checking if database has been initialized" >&2
+if mysql -B --connect-timeout=1 -h db -u $DB_ENV_MYSQL_USER \
+		-p$DB_ENV_MYSQL_PASSWORD \
+		-e "SELECT 1 FROM Tickets;" $DB_ENV_MYSQL_DATABASE > /dev/null 2>&1; then
+	echo "[i] database exists" >&2
+	exit 0
+else
+	echo "[i] database does not exist" >&2
+	exit 1
+fi

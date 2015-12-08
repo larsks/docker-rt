@@ -1,0 +1,15 @@
+#!/bin/sh
+
+export PGPASSWORD=$DB_ENV_POSTGRES_PASSWORD
+export PGDATABASE=$DB_ENV_POSTGRES_DB
+export PGUSER=$DB_ENV_POSTGRES_USER
+export PGHOST=db
+
+echo "[i] checking if database has been initialized" >&2
+if psql -w -c 'SELECT 1 FROM Tickets;' > /dev/null 2>&1; then
+	echo "[i] database exists" >&2
+	exit 0
+else
+	echo "[i] database does not exist" >&2
+	exit 1
+fi

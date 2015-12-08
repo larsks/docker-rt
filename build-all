@@ -1,0 +1,8 @@
+#!/bin/sh
+
+for image in rt-base rt-server rt-cron; do
+	(
+	cd $image
+	docker build -t larsks/$image .
+	)
+done

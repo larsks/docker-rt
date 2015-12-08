@@ -1,0 +1,11 @@
+#!/bin/sh
+
+(
+/scripts/generate-base-config
+/scripts/generate-db-config
+echo '1;'
+) > /etc/rt4/RT_SiteConfig_Generated.pm
+
+if ! [ -f /etc/rt4/RT_SiteConfig.pm ]; then
+	ln -s /etc/rt4/RT_SiteConfig_Generated.pm /etc/rt4/RT_SiteConfig.pm
+fi

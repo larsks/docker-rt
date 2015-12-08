@@ -1,0 +1,6 @@
+#!/usr/bin/perl
+
+use lib '/usr/lib/rt4';
+use RT;
+RT->LoadConfig;
+print RT->Config->Get($ARGV[0]), "\n";

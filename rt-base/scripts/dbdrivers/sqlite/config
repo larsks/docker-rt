@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cat <<EOF
+Set(\$DatabaseType, 'SQLite');
+EOF
+

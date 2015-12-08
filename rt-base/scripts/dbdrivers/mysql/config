@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cat <<EOF
+Set(\$DatabaseType, 'mysql');
+Set(\$DatabaseHost, 'db');
+Set(\$DatabaseUser, '$DB_ENV_MYSQL_USER');
+Set(\$DatabasePassword, '$DB_ENV_MYSQL_PASSWORD');
+Set(\$DatabaseName, '$DB_ENV_MYSQL_DB');
+EOF
+

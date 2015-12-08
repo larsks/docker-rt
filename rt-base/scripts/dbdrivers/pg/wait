@@ -1,0 +1,22 @@
+#!/bin/sh
+
+: ${DB_CONNECT_RETRIES:=20}
+
+export PGPASSWORD=$DB_ENV_POSTGRES_PASSWORD
+export PGDATABASE=$DB_ENV_POSTGRES_DB
+export PGUSER=$DB_ENV_POSTGRES_USER
+export PGHOST=db
+
+for i in $(seq 1 1 $DB_CONNECT_RETRIES); do
+	echo "[i] trying to connect to postgres ($i)" >&2
+
+	if psql -w -c 'SELECT version();'; then
+		echo "[i] postgres is ready" >&2
+		exit 0
+	else
+		sleep 5
+	fi
+done
+
+echo "[!] failed to connect to postgres" >&2
+exit 1
