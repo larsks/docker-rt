@@ -11,6 +11,7 @@ else
 fi
 
 info "detected database type $DB_TYPE"
+rm -f /scripts/db
 ln -s /scripts/dbdrivers/$DB_TYPE /scripts/db
 /scripts/db/config
 
