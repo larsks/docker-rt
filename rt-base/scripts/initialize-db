@@ -1,0 +1,7 @@
+#!/bin/sh
+
+. /scripts/functions.sh
+
+info 'initializing database schema'
+rt-setup-database --action init --skip-create
+/scripts/load-sitedata
