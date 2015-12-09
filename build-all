@@ -3,6 +3,7 @@
 for image in rt-base rt-server rt-cron; do
 	(
 	cd $image
-	docker build -t larsks/$image .
+	docker build -t docker.io/larsks/$image .
+	docker push docker.io/larsks/$image
 	)
 done
