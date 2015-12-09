@@ -6,21 +6,31 @@ FETCHMAILRC=/home/rt4/fetchmailrc
 
 info 'generating fetchmail configuration'
 
-if echo "${POP_TLS:-on}" | is_true; then
-	info 'enabling ssl for pop'
+: ${FETCHMAIL_PROTO:=pop3}
+
+if echo "${FETCHMAIL_TLS:-on}" | is_true; then
+	info 'enabling ssl for fetchmail'
 	TLS_ENABLED=1
 fi
 
-if [ -z "$POP_PORT" ]; then
+if [ -z "$FETCHMAIL_PORT" ]; then
 	if [ "$TLS_ENABLED" = 1 ]; then
-		POP_PORT=995
+		case "$FETCHMAIL_PROTO" in
+			imap)	FETCHMAIL_PORT=993
+				;;
+			pop*)	FETCHMAIL_PORT=995
+				FETCHMAIL_PROTO=pop3
+				;;
+			*)	fatal "unknown email protocol: $FETCHMAIL_PROTO"
+				;;
+		esac
 	fi
 fi
 
 (
 cat <<EOF
-poll $POP_HOST proto pop3 ${POP_PORT:+port $POP_PORT}
-username $POP_USER password $POP_PASS
+poll $FETCHMAIL_HOST proto $FETCHMAIL_PROTO ${FETCHMAIL_PORT:+port $FETCHMAIL_PORT}
+username $FETCHMAIL_USER password $FETCHMAIL_PASS
   mda "/usr/bin/rt-mailgate --url http://rt/ --queue General --action correspond"
 EOF
 
