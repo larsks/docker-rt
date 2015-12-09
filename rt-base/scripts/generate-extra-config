@@ -1,0 +1,11 @@
+#!/bin/sh
+
+. /scripts/functions.sh
+
+EXTRACONFIG=/etc/rt4/RT_SiteConfig_Extra.pm
+
+if [ -f "$EXTRACONFIG" ]; then
+	info "found additional configuration in $EXTRACONFIG"
+	cat "$EXTRACONFIG"
+fi
+
