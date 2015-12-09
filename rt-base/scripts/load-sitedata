@@ -1,16 +1,18 @@
 #!/bin/sh
 
-echo "[i] loading sitedata"
+. /scripts/functions.sh
+
+info "loading sitedata"
 
 if ! cd /etc/rt4/sitedata; then
-	echo "[i] nothing to load" >&2
+	info 'nothing to load'
 	exit
 fi
 
 for datafile in *; do
 	[ -f "$datafile" ] || continue
 
-	echo "[i] loading data from $datafile"
+	info "loading data from $datafile"
 	rt-setup-database --action insert \
 		--datafile "$datafile" \
 		--skip-create

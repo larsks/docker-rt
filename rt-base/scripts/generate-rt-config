@@ -1,5 +1,9 @@
 #!/bin/sh
 
+. /scripts/functions.sh
+
+log 'generating rt configuration'
+
 (
 /scripts/generate-base-config
 /scripts/generate-db-config

@@ -4,6 +4,9 @@ RUN apk --update add \
 	rt4 \
 	mysql-client \
 	postgresql-client \
+	perl-dbd-sqlite \
+	perl-dbd-pg \
+	perl-dbd-mysql \
 	make
 RUN mkdir /home/rt4; chown rt4:rt4 /home/rt4
 RUN mv /etc/rt4/RT_SiteConfig.pm /etc/rt4/RT_SiteConfig_Original.pm

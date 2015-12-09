@@ -1,16 +1,16 @@
 #!/bin/sh
 
+. /scripts/functions.sh
+
 if [ -n "$DB_ENV_POSTGRES_USER" ]; then
-	echo '[i] detected postgres' >&2
 	DB_TYPE=pg
 elif [ -n "$DB_ENV_MYSQL_USER" ]; then
-	echo '[i] detected mysql' >&2
 	DB_TYPE=mysql
 else
-	echo '[i] defaulting to sqlite' >&2
 	DB_TYPE=sqlite
 fi
 
+info "detected database type $DB_TYPE"
 ln -s /scripts/dbdrivers/$DB_TYPE /scripts/db
 /scripts/db/config
 

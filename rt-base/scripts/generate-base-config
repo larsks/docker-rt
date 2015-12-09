@@ -1,19 +1,13 @@
 #!/bin/sh
 
-MY_ADDRESS=$(ip addr show eth0 |
-	awk '$1 == "inet" {print $2}' |
-	cut -f1 -d/)
-
-: ${RT_RTNAME:='example.com'}
-: ${RT_DOMAIN:=$MY_ADDRESS}
-
 cat <<EOF
 Set(\$rtname, '$RT_NAME');
 Set(\$Organization, '$RT_DOMAIN');
-Set(\$WebDomain, '${RT_WEBDOMAIN:-$RT_DOMAIN}');
+Set(\$WebDomain, '${RT_WEBDOMAIN}');
 Set(\$WebPath, '$RT_WEBPATH');
 Set(\$CorrespondAddress, '$RT_CORRESPONDADDRESS');
 Set(\$CommentAddress, '$RT_COMMENTADDRESS');
 Set(\$SendmailPath, '/usr/bin/msmtp');
+Set(@ReferrerWhitelist, qw/${RT_WEBDOMAIN}:80 ${RT_WEBDOMAIN}:443/);
 EOF
 

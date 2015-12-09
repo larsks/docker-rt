@@ -4,8 +4,10 @@
 
 FETCHMAILRC=/home/rt4/fetchmailrc
 
+info 'generating fetchmail configuration'
+
 if echo "${POP_TLS:-on}" | is_true; then
-	echo '[i] enabling ssl for pop' >&2
+	info 'enabling ssl for pop'
 	TLS_ENABLED=1
 fi
 
